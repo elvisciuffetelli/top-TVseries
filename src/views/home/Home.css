@@ -1,0 +1,31 @@
+.appBar {
+  position: 'relative';
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.heroUnit {
+  margin-left: 50px;
+}
+
+.cardsContainer {
+  padding: 0 30px;
+}
+
+.heroContent {
+  max-width: 600;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.heroButtons {
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  background-color: #f3f3f3;
+  padding: 20px 20px;
+}
