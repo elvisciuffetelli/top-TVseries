@@ -24,7 +24,7 @@ class LatestView extends Component {
   render() {
     return (
       <Grid container spacing={40}>
-        {this.state.cards.map(card => (
+        {cards.map(card => (
           <CardItem item key={card} sm={6} md={4} lg={3}
             heading="Titolo"
           />
