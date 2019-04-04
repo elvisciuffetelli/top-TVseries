@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './views/home';
+import Main from './views/Main';
 import AppFooter from './components/appFooter';
 import CustomHeader from './components/CustomHeader';
 import './App.css';
@@ -8,7 +8,7 @@ const App = () => {
   return (
     <React.Fragment>
       <CustomHeader />
-      <Home />
+      <Main />
       <AppFooter/>
     </React.Fragment>
   )

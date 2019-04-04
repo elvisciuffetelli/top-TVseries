@@ -40,12 +40,28 @@ class Home extends Component {
     const sideList = (
       <div className={classes.list}>
         <List>
+          <Link to="/" key="popular">
+            <ListItem button>
+              <ListItemIcon>
+                {<ListIcon />}
+              </ListItemIcon>
+              <ListItemText primary="Popular" />
+            </ListItem>
+          </Link>
           <Link to="/latest" key="latest">
             <ListItem button>
               <ListItemIcon>
                 {<ListIcon />}
               </ListItemIcon>
               <ListItemText primary="Latest" />
+            </ListItem>
+          </Link>
+          <Link to="/toprated" key="toprated">
+            <ListItem button>
+              <ListItemIcon>
+                {<ListIcon />}
+              </ListItemIcon>
+              <ListItemText primary="Top Rated" />
             </ListItem>
           </Link>
         </List>

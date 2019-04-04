@@ -1,0 +1,17 @@
+.heroUnit {
+  margin-left: 50px;
+}
+
+.cardsContainer {
+  padding: 0 30px;
+}
+
+.heroContent {
+  max-width: 600;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.heroButtons {
+  margin-top: 20px;
+}

@@ -28,7 +28,7 @@ const CardItem = (props) => {
         </CardContent>
         <CardActions>
           <Button size="small" color="primary">
-            View
+            {props.detailButton}
           </Button>
         </CardActions>
       </Card>
