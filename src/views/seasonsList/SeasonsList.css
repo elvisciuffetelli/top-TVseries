@@ -1,0 +1,14 @@
+.seasons-container {
+  width: 100%;
+  margin: 4rem auto;
+  max-width: 900px;
+  background-color: #f3f3f3;
+}
+
+#root .nested-item {
+  padding-left: 10px;
+}
+
+#root .main-list-container {
+
+}

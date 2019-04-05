@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
 import CardItem from '../../components/cardItem';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../../components/loader';
 import urls from '../../backendApi/constUrls';
+import HttpClient from '../../backendApi/httpClient/httpClient';
+import { observer } from 'mobx-react';
+import { action } from 'mobx';
+import store from '../../store/store';
 import './LatestView.css';
 
+@observer
 class LatestView extends Component {
   constructor(props) {
     super(props);
 
+    this.store = store;
     this.state = {
       latestCards: {},
       loading: true
     };
+
+    this.saveData = this.saveData.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    axios.get(urls.LATEST)
-      .then(res => {
-        const latestCards = res.data;
-        this.setState({
-          latestCards,
-          loading: false
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    this.saveData();
+    console.log(this.store.dataProva);
+    HttpClient(urls.LATEST)
+    .then(res => {
+      this.setState({
+        latestCards: res,
+        loading: false
       });
+    })
   }
 
   render() {
@@ -60,12 +66,25 @@ class LatestView extends Component {
                 overView={this.state.latestCards.overview || "Missing overview"}
                 image= { imageUrl || require("../../assets/images/image-not-found.jpg")}
                 detailButton="Go to serie's detail"
+                popularity={this.state.latestCards.popularity}
+                voteAverage={this.state.latestCards.vote_average}
+                voteCount={this.state.latestCards.vote_count}
+                handleClick={() => this.handleClick(this.state.latestCards.id)}
               />
             }
           </Grid>
         </div>
       </React.Fragment>
     )
+  }
+
+  handleClick(id) {
+    this.props.history.push(`/seasons/${id}`);
+  }
+
+  @action.bound
+  saveData() {
+    this.store.dataProva = 'prova';
   }
 }
 

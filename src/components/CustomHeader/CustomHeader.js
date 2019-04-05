@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 //TODO: import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Menu from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { withRouter } from 'react-router'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { Link } from 'react-router-dom'
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,11 +26,18 @@ const styles = {
 };
 
 
-class Home extends Component {
-  state = {
-    right: false,
-  };
+class CustomHeader extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      right: false,
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  
   toggleDrawer = (side, open) => () => {
     this.setState({
       [side]: open
@@ -48,20 +57,20 @@ class Home extends Component {
               <ListItemText primary="Popular" />
             </ListItem>
           </Link>
-          <Link to="/latest" key="latest">
-            <ListItem button>
-              <ListItemIcon>
-                {<ListIcon />}
-              </ListItemIcon>
-              <ListItemText primary="Latest" />
-            </ListItem>
-          </Link>
           <Link to="/toprated" key="toprated">
             <ListItem button>
               <ListItemIcon>
                 {<ListIcon />}
               </ListItemIcon>
               <ListItemText primary="Top Rated" />
+            </ListItem>
+          </Link>
+          <Link to="/latest" key="latest">
+            <ListItem button>
+              <ListItemIcon>
+                {<ListIcon />}
+              </ListItemIcon>
+              <ListItemText primary="Latest" />
             </ListItem>
           </Link>
         </List>
@@ -71,11 +80,12 @@ class Home extends Component {
     return (
       <React.Fragment>
         <AppBar position="static" className="appBar">
-          <Toolbar>
-            <Menu className="icon" onClick={this.toggleDrawer('right', true)}/>
+          <Toolbar className="menu-container">
+            <HomeIcon className="home-icon" onClick={this.handleClick}/>
             <Typography variant="subheading" color="inherit" noWrap>
-              Top TV Series 
+              Top TV Series - by The Movie Database API
             </Typography>
+            <Menu className="icon" onClick={this.toggleDrawer('right', true)}/>
           </Toolbar>
         </AppBar>
 
@@ -92,7 +102,11 @@ class Home extends Component {
       </React.Fragment>
     );
   }
+
+  handleClick() {
+    this.props.history.push('/');
+  }
 }
 
 
-export default withStyles(styles)(Home);
+export default withRouter(withStyles(styles)(CustomHeader));

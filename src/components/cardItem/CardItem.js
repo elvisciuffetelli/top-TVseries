@@ -10,25 +10,56 @@ import Typography from '@material-ui/core/Typography';
 import './CardItem.css'
 
 const CardItem = (props) => {
+  const {
+    image,
+    heading,
+    overView,
+    popularity,
+    voteAverage,
+    voteCount,
+    detailButton,
+    handleClick
+  } = props;
+
   return (
     <Grid item sm={6} md={4} lg={3}>
       <Card className="card">
         <CardMedia
           className="cardMedia"
-          image={props.image}
+          image={image}
           title="Image title"
         />
         <CardContent className="cardContent">
           <Typography gutterBottom variant="title" component="h2">
-            {props.heading}
+            {heading}
           </Typography>
-          <Typography>
-            {props.overView}
+          <Typography gutterBottom>
+            {overView}
           </Typography>
+          <div>
+            <Typography
+              color="secondary"
+              gutterBottom
+            >
+              Popularity: {popularity}
+            </Typography>
+            <Typography
+              color="secondary"
+              gutterBottom
+            >
+              Vote average: {voteAverage}
+            </Typography>
+            <Typography
+              color="secondary"
+              gutterBottom
+            >
+              Vote count: {voteCount}
+            </Typography>
+          </div>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
-            {props.detailButton}
+          <Button size="small" color="primary" onClick={handleClick}>
+            {detailButton}
           </Button>
         </CardActions>
       </Card>

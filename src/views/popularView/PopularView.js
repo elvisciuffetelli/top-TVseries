@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
 import CardItem from '../../components/cardItem';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../../components/loader';
 import urls from '../../backendApi/constUrls';
+import HttpClient from '../../backendApi/httpClient/httpClient';
 import './PopularView.css';
 
 
@@ -16,24 +16,22 @@ class PopularView extends Component {
       popularCards: [],
       loading: true
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    axios.get(urls.POPULAR)
+    HttpClient(urls.POPULAR)
       .then(res => {
-        const popularCards = res.data.results;
+        const popularCards = res.results;
         this.setState({
           popularCards,
           loading: false
         });
       })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   render() {
-
     return (
       <React.Fragment>
         <div className="heroUnit">
@@ -57,13 +55,21 @@ class PopularView extends Component {
                 heading={card.original_name || "Missing title"}
                 overView={card.overview || "Missing overview"}
                 image={`${urls.IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
+                popularity={card.popularity}
+                voteAverage={card.vote_average}
+                voteCount={card.vote_count}
                 detailButton="Go to seasons detail"
+                handleClick={() => this.handleClick(card.id)}
               />
             ))}
           </Grid>
         </div>
       </React.Fragment>
     )
+  }
+
+  handleClick(id) {
+    this.props.history.push(`/seasons/${id}`);
   }
 }
 

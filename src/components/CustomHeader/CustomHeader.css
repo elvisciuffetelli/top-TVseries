@@ -5,3 +5,15 @@
 .icon {
   margin-right: 10px;
 }
+
+#root .home-icon:hover {
+  cursor: pointer;
+}
+
+#root .icon:hover {
+  cursor: pointer;
+}
+
+#root .menu-container {
+  justify-content: space-between;
+}
