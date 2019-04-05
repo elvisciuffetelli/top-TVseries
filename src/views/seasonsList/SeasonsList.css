@@ -9,6 +9,6 @@
   padding-left: 10px;
 }
 
-#root .main-list-container {
-
+.seasonsList-main-container {
+  display: flex;
 }

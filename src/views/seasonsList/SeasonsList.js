@@ -6,6 +6,8 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import HttpClient from '../../backendApi/httpClient/httpClient';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import CardItem from '../../components/cardItem';
+import Loader from '../../components/loader';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -54,33 +56,46 @@ class SeasonsList extends Component {
             Here's a list of all the serie's seasons
           </Typography>
         </div>
-        <div className="seasons-container">
-        
-          {
-            this.state.seasons.map(season => (
-              <React.Fragment key={season.id}>
-                <List component="nav" className="main-list-container">
-                  <ListItem button onClick={this.handleClick}>
-                    <ListItemText primary={season.name} secondary={season.overview || "No overview available"}/>
-                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                  </ListItem>
-                  <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                      <ListItem button className="nested-item">
-                        <ListItemIcon>
-                          <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText inset secondary={`${season.episode_count} episodes`} />
+        { 
+          this.state.loading ? 
+            <Loader/> : 
+          <div className="seasonsList-main-container">
+            <div className="detail-container">
+              <CardItem item sm={6} md={4} lg={3}
+                key={this.state.detail.id}
+                heading={this.state.detail.original_name || "Missing title"}
+                overView={this.state.detail.overview || "Missing overview"}
+                image= {require("../../assets/images/image-not-found.jpg")}
+              />
+            </div>
+            <div className="seasons-container">
+              {
+                this.state.seasons.map(season => (
+                  <React.Fragment key={season.id}>
+                    <List component="nav" className="main-list-container">
+                      <ListItem button onClick={this.handleClick}>
+                        <ListItemText primary={season.name} secondary={season.overview || "No overview available"}/>
+                        {this.state.open ? <ExpandLess /> : <ExpandMore />}
                       </ListItem>
+                      <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                          <ListItem button className="nested-item">
+                            <ListItemIcon>
+                              <StarBorder />
+                            </ListItemIcon>
+                            <ListItemText inset secondary={`${season.episode_count} episodes`} />
+                          </ListItem>
+                        </List>
+                      </Collapse>
                     </List>
-                  </Collapse>
-                </List>
-                <Divider />
-              </React.Fragment>
-          
-            ))
-          }
-        </div>
+                    <Divider />
+                  </React.Fragment>
+                ))
+              }
+            </div>
+          </div>
+        }
+ 
       </React.Fragment>
     );
   }

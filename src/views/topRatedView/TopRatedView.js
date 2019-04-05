@@ -51,17 +51,19 @@ class TopRatedView extends Component {
               this.state.loading ? 
                 <Loader/> : 
               this.state.topRatedCards.map(card => (
-              <CardItem item sm={6} md={4} lg={3}
-                key={card.id}
-                heading={card.original_name || "Missing title"}
-                overView={card.overview || "Missing overview"}
-                image={`${urls.IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
-                popularity={card.popularity}
-                voteAverage={card.vote_average}
-                voteCount={card.vote_count}
-                detailButton="Go to seasons detail"
-                handleClick={() => this.handleClick(card.id)}
-              />
+              <Grid item sm={6} md={4} lg={3}>
+                <CardItem item sm={6} md={4} lg={3}
+                  key={card.id}
+                  heading={card.original_name || "Missing title"}
+                  overView={card.overview || "Missing overview"}
+                  image={`${urls.IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
+                  popularity={card.popularity}
+                  voteAverage={card.vote_average}
+                  voteCount={card.vote_count}
+                  detailButton="Go to seasons detail"
+                  handleClick={() => this.handleClick(card.id)}
+                />
+              </Grid>
             ))}
           </Grid>
         </div>

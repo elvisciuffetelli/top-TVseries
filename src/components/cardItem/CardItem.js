@@ -22,7 +22,6 @@ const CardItem = (props) => {
   } = props;
 
   return (
-    <Grid item sm={6} md={4} lg={3}>
       <Card className="card">
         <CardMedia
           className="cardMedia"
@@ -63,7 +62,6 @@ const CardItem = (props) => {
           </Button>
         </CardActions>
       </Card>
-    </Grid>
   )
 }
 

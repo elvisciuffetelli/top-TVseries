@@ -60,17 +60,19 @@ class LatestView extends Component {
             {
               this.state.loading ? 
                 <Loader/> : 
-              <CardItem item sm={6} md={4} lg={3}
-                key={this.state.latestCards.id}
-                heading={this.state.latestCards.original_name || "Missing title"}
-                overView={this.state.latestCards.overview || "Missing overview"}
-                image= { imageUrl || require("../../assets/images/image-not-found.jpg")}
-                detailButton="Go to serie's detail"
-                popularity={this.state.latestCards.popularity}
-                voteAverage={this.state.latestCards.vote_average}
-                voteCount={this.state.latestCards.vote_count}
-                handleClick={() => this.handleClick(this.state.latestCards.id)}
-              />
+              <Grid item sm={6} md={4} lg={3}>
+                <CardItem item sm={6} md={4} lg={3}
+                  key={this.state.latestCards.id}
+                  heading={this.state.latestCards.original_name || "Missing title"}
+                  overView={this.state.latestCards.overview || "Missing overview"}
+                  image= { imageUrl || require("../../assets/images/image-not-found.jpg")}
+                  detailButton="Go to serie's detail"
+                  popularity={this.state.latestCards.popularity}
+                  voteAverage={this.state.latestCards.vote_average}
+                  voteCount={this.state.latestCards.vote_count}
+                  handleClick={() => this.handleClick(this.state.latestCards.id)}
+                />
+              </Grid>
             }
           </Grid>
         </div>
