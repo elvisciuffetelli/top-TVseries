@@ -27,35 +27,21 @@ class SeasonsList extends Component {
     this.goToSeasonDetail = this.goToSeasonDetail.bind(this);
   }
 
-  componentDidMount() {
-    const seasonUrl = urls.getDetails(this.props.match.params.id).SEASON;
-
-    HttpClient(seasonUrl)
-      .then(res => {
-        const detail = res;
-        const seasons = res.seasons;
-        this.setState({
-          detail,
-          seasons,
-          loading: false
-        }); 
-      })
-  }
-
   render() {
-    let imageUrl = `${urls.getDetails().IMAGE}${this.state.detail.backdrop_path}`;
-    if (!this.state.detail.backdrop_path) {
-      imageUrl = false;
-    }
-
     const {
       original_name,
       id,
       overview,
       number_of_episodes,
       first_air_date,
-      number_of_seasons
+      number_of_seasons,
+      backdrop_path
     } = this.state.detail;
+
+    let imageUrl = `${urls.getDetails().IMAGE}${backdrop_path}`;
+    if (!backdrop_path) {
+      imageUrl = false;
+    }
 
     return (
       <React.Fragment>
@@ -114,6 +100,21 @@ class SeasonsList extends Component {
  
       </React.Fragment>
     );
+  }
+
+  componentDidMount() {
+    const seasonUrl = urls.getDetails(this.props.match.params.id).SEASON;
+
+    HttpClient(seasonUrl)
+      .then(res => {
+        const detail = res;
+        const seasons = res.seasons;
+        this.setState({
+          detail,
+          seasons,
+          loading: false
+        }); 
+      })
   }
 
   goToSeasonDetail(id, number, name) {

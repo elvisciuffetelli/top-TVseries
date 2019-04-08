@@ -15,21 +15,15 @@ class PopularView extends Component {
 
     this.state = {
       popularCards: [],
-      loading: true
+      page: 1,
+      totalPages: 0,
+      loading: true,
     };
 
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
-    HttpClient(urls.getTvShows().POPULAR)
-      .then(res => {
-        const popularCards = res.results;
-        this.setState({
-          popularCards,
-          loading: false
-        });
-      })
+    this.getTvShowsPopularList = this.getTvShowsPopularList.bind(this);
+    this.forwardPagination = this.forwardPagination.bind(this);
+    this.backPagination = this.backPagination.bind(this);
   }
 
   render() {
@@ -67,26 +61,64 @@ class PopularView extends Component {
                 />
               </Grid>
             ))}
-    {/*         <TablePagination
-              colSpan={3}
-              count={20}
-              rowsPerPage={4}
-              page={1}
-              SelectProps={{
-                native: true,
-              }}}
-              onChangePage={this.handleChangePage}
-              onChangeRowsPerPage={this.handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActionsWrapped}
-            /> */}
+            <TablePagination
+              className="table-pagination"
+              component="div"
+              count={this.state.totalPages || 0}
+              labelRowsPerPage="" // this to hide label rows
+              rowsPerPageOptions={[]} // this to hide rows option button , [5, 10, 25]
+              rowsPerPage={20} // element per page
+              page={this.state.page - 1 || 0}
+              backIconButtonProps={{
+                'aria-label': 'Previous Page',
+                onClick: this.backPagination
+              }}
+              nextIconButtonProps={{
+                'aria-label': 'Next Page',
+                onClick: this.forwardPagination
+              }}
+              onChangePage={() => null}
+            />
           </Grid>
         </div>
       </React.Fragment>
     )
   }
 
+  componentDidMount() {
+    const params = this.state.page;
+    this.getTvShowsPopularList(params);
+  }
+
   handleClick(id) {
     this.props.history.push(`/seasons/${id}`);
+  }
+
+  forwardPagination() {
+    let params = this.state.page;
+    params += 1;
+    this.getTvShowsPopularList(params);
+  }
+
+  backPagination() {
+    let params = this.state.page;
+    params -= 1;
+    this.getTvShowsPopularList(params);
+  }
+
+  getTvShowsPopularList(params) {
+    HttpClient(urls.getTvShows(params).POPULAR)
+     .then(res => {
+      const popularCards = res.results;
+      const totalPages = res.total_pages;
+      const page = res.page;
+      this.setState({
+        popularCards,
+        totalPages,
+        page,
+        loading: false
+      });
+    })
   }
 }
 

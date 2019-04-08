@@ -17,22 +17,6 @@ class SeasonDetail extends Component {
     };
   }
 
-  componentDidMount() {
-    const seasonUrl = urls.getDetails(this.props.match.params.id, this.props.match.params.number).SEASON_DETAIL;
-
-    HttpClient(seasonUrl)
-      .then(res => {
-        const seasonDetail = res;
-        const episodes = res.episodes;
-        this.setState({
-          seasonDetail,
-          episodes,
-          loading: false
-        }); 
-      })
-  }
-
-
   render() {
     return (
       <React.Fragment>
@@ -72,6 +56,21 @@ class SeasonDetail extends Component {
         </div>
       </React.Fragment>
     )
+  }
+
+  componentDidMount() {
+    const seasonUrl = urls.getDetails(this.props.match.params.id, this.props.match.params.number).SEASON_DETAIL;
+
+    HttpClient(seasonUrl)
+      .then(res => {
+        const seasonDetail = res;
+        const episodes = res.episodes;
+        this.setState({
+          seasonDetail,
+          episodes,
+          loading: false
+        }); 
+      })
   }
 }
 

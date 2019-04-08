@@ -1,9 +1,12 @@
 import React from 'react';
+import spinner from'../../assets/images/Spinner-1s-200px.gif';
 import './Loader.css';
 
 const Loader = () => (
   <div className="loader-container">
-    <span className="loader-text">Loading...</span>
+    <div className="loader-text">
+      <img src={spinner} alt="loader spinner"/>
+    </div>
   </div>
 )
 

@@ -4,6 +4,7 @@ import CardItem from '../../components/cardItem';
 import Typography from '@material-ui/core/Typography';
 import Loader from '../../components/loader';
 import urls from '../../backendApi/constUrls';
+import TablePagination from '@material-ui/core/TablePagination';
 import HttpClient from '../../backendApi/httpClient/httpClient';
 import './TopRatedView.css';
 
@@ -14,21 +15,15 @@ class TopRatedView extends Component {
 
     this.state = {
       topRatedCards: [],
+      page: 1,
+      totalPages: 0,
       loading: true
     };
 
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
-    HttpClient(urls.getTvShows().TOP_RATED)
-      .then(res => {
-        const topRatedCards = res.results;
-        this.setState({
-          topRatedCards,
-          loading: false
-        });
-      })
+    this.getTvShowsTopRatedList = this.getTvShowsTopRatedList.bind(this);
+    this.forwardPagination = this.forwardPagination.bind(this);
+    this.backPagination = this.backPagination.bind(this);
   }
 
   render() {
@@ -67,14 +62,64 @@ class TopRatedView extends Component {
                 />
               </Grid>
             ))}
+            <TablePagination
+              className="table-pagination"
+              component="div"
+              count={this.state.totalPages || 0} //  total_elements
+              labelRowsPerPage="" // this to hide label rows
+              rowsPerPageOptions={[]} // this to hide rows option button , [5, 10, 25]
+              rowsPerPage={20} // element per page
+              page={this.state.page - 1 || 0}
+              backIconButtonProps={{
+                'aria-label': 'Previous Page',
+                onClick: this.backPagination
+              }}
+              nextIconButtonProps={{
+                'aria-label': 'Next Page',
+                onClick: this.forwardPagination
+              }}
+              onChangePage={() => null}
+            />
           </Grid>
         </div>
       </React.Fragment>
     )
   }
 
+  componentDidMount() {
+    const params = this.state.page;
+    this.getTvShowsTopRatedList(params);
+  }
+
+  forwardPagination() {
+    let params = this.state.page;
+    params += 1;
+    this.getTvShowsTopRatedList(params);
+  }
+
+  backPagination() {
+    let params = this.state.page;
+    params -= 1;
+    this.getTvShowsTopRatedList(params);
+  }
+
   handleClick(id) {
     this.props.history.push(`/seasons/${id}`);
+  }
+
+  getTvShowsTopRatedList(params) {
+    HttpClient(urls.getTvShows(params).TOP_RATED)
+    .then(res => {
+      const topRatedCards = res.results;
+      const totalPages = res.total_pages;
+      const page = res.page;
+      this.setState({
+        topRatedCards,
+        totalPages,
+        page,
+        loading: false
+      });
+    })
   }
 }
 

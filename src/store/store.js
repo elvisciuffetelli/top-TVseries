@@ -9,29 +9,13 @@
 import { observable } from 'mobx';
 
 import syncWithLocalStorage from './decorators/syncWithLocalStorage.decorators';
-//import syncWithSessionStorage from './decorators/syncWithSessionStorage.decorators';
+import syncWithSessionStorage from './decorators/syncWithSessionStorage.decorators';
 
 class Store {
 
   @observable
   @syncWithLocalStorage
   dataProva = "";
-
-
-/*   @syncWithSessionStorage
-  @observable
-  taskFilters = {
-    checklist: [],
-    status: [],
-    roles: []
-  };
-
-  @observable
-  taskDetail = {};
-
-  @observable
-  @syncWithSessionStorage
-  notificationsPageNew = {}; */
 }
 
 export default new Store();
