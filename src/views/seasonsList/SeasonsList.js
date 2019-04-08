@@ -5,13 +5,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import HttpClient from '../../backendApi/httpClient/httpClient';
-import ExpandLess from '@material-ui/icons/ExpandLess';
 import CardItem from '../../components/cardItem';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import Loader from '../../components/loader';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import urls from '../../backendApi/constUrls';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import Collapse from '@material-ui/core/Collapse';
 import './SeasonsList.css';
 
 class SeasonsList extends Component {
@@ -21,11 +21,10 @@ class SeasonsList extends Component {
     this.state = {
       detail: {},
       seasons: [],
-      loading: true,
-      open: false
+      loading: true
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.goToSeasonDetail = this.goToSeasonDetail.bind(this);
   }
 
   componentDidMount() {
@@ -44,8 +43,11 @@ class SeasonsList extends Component {
   }
 
   render() {
-    console.log('season detail', this.state.seasons);
-    console.log('serie detail', this.state.detail);
+    let imageUrl = `${urls.IMAGE}${this.state.detail.backdrop_path}`;
+    if (!this.state.detail.backdrop_path) {
+      imageUrl = false;
+    }
+
     return (
       <React.Fragment>
         <div className="heroContent">
@@ -59,50 +61,55 @@ class SeasonsList extends Component {
         { 
           this.state.loading ? 
             <Loader/> : 
-          <div className="seasonsList-main-container">
-            <div className="detail-container">
-              <CardItem item sm={6} md={4} lg={3}
+          <Grid container justify="center" className="seasonList_main-container">
+            <Grid item xs={12} sm={10} md={6} className="seasonList_item">
+              <CardItem
                 key={this.state.detail.id}
                 heading={this.state.detail.original_name || "Missing title"}
                 overView={this.state.detail.overview || "Missing overview"}
-                image= {require("../../assets/images/image-not-found.jpg")}
+                image= {imageUrl || require("../../assets/images/image-not-found.jpg")}
+                primaryLabel="Number of episodes"
+                primaryContent={this.state.detail.number_of_episodes}
+                secondaryLabel="First air date"
+                secondaryContent={this.state.detail.first_air_date}
+                terthiaryLabel="Number of seasons"
+                terthiaryContent={this.state.detail.number_of_seasons}
+                isSeasonsList
               />
-            </div>
-            <div className="seasons-container">
+            </Grid>
+            <Grid item xs={12} sm={10} md={6} className="seasonList_item">
               {
                 this.state.seasons.map(season => (
                   <React.Fragment key={season.id}>
                     <List component="nav" className="main-list-container">
-                      <ListItem button onClick={this.handleClick}>
+                      <ListItem button>
                         <ListItemText primary={season.name} secondary={season.overview || "No overview available"}/>
-                        {this.state.open ? <ExpandLess /> : <ExpandMore />}
                       </ListItem>
-                      <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                          <ListItem button className="nested-item">
-                            <ListItemIcon>
-                              <StarBorder />
-                            </ListItemIcon>
-                            <ListItemText inset secondary={`${season.episode_count} episodes`} />
-                          </ListItem>
-                        </List>
-                      </Collapse>
+                      <ListItem button className="nested-item">
+                        <ListItemIcon>
+                          <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText inset secondary={`${season.episode_count} episodes`} />
+                        <Button size="small" color="primary" onClick={() => this.goToSeasonDetail(this.props.match.params.id, season.season_number, this.state.detail.original_name)}>
+                          Go to season's detail
+                        </Button>
+                      </ListItem>
                     </List>
                     <Divider />
                   </React.Fragment>
                 ))
               }
-            </div>
-          </div>
+            </Grid>
+          </Grid>
         }
  
       </React.Fragment>
     );
   }
 
-  handleClick() {
-    this.setState(state => ({ open: !state.open }));
-  };
+  goToSeasonDetail(id, number, name) {
+    this.props.history.push(`/season/${id}/${number}/${name}`);
+  }
 
 }
 

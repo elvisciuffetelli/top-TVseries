@@ -7,6 +7,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { withRouter } from 'react-router'
@@ -88,6 +89,9 @@ class CustomHeader extends Component {
             <Menu className="icon" onClick={this.toggleDrawer('right', true)}/>
           </Toolbar>
         </AppBar>
+        <Button size="small" color="primary" onClick={() => this.props.history.goBack()}>
+          BACK
+        </Button>
 
         <Drawer anchor="right" open={this.state.right} onClose={this.toggleDrawer('right', false)}>
           <div

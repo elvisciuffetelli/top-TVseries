@@ -56,20 +56,23 @@ class LatestView extends Component {
           </div>
         </div>
         <div className="cardsContainer">
-          <Grid container spacing={40}>
+          <Grid container spacing={40} justify="center">
             {
               this.state.loading ? 
                 <Loader/> : 
-              <Grid item sm={6} md={4} lg={3}>
-                <CardItem item sm={6} md={4} lg={3}
+              <Grid item xs={12} sm={10} md={6}>
+                <CardItem
                   key={this.state.latestCards.id}
                   heading={this.state.latestCards.original_name || "Missing title"}
                   overView={this.state.latestCards.overview || "Missing overview"}
                   image= { imageUrl || require("../../assets/images/image-not-found.jpg")}
                   detailButton="Go to serie's detail"
-                  popularity={this.state.latestCards.popularity}
-                  voteAverage={this.state.latestCards.vote_average}
-                  voteCount={this.state.latestCards.vote_count}
+                  primaryLabel="Number of episodes"
+                  primaryContent={this.state.latestCards.number_of_episodes}
+                  secondaryLabel="First air date"
+                  secondaryContent={this.state.latestCards.first_air_date}
+                  terthiaryLabel="Number of seasons"
+                  terthiaryContent={this.state.latestCards.number_of_seasons}
                   handleClick={() => this.handleClick(this.state.latestCards.id)}
                 />
               </Grid>

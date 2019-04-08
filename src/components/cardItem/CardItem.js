@@ -5,7 +5,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import './CardItem.css'
 
@@ -14,11 +13,15 @@ const CardItem = (props) => {
     image,
     heading,
     overView,
-    popularity,
-    voteAverage,
-    voteCount,
+    primaryLabel,
+    primaryContent,
+    secondaryLabel,
+    secondaryContent,
+    terthiaryLabel,
+    terthiaryContent,
     detailButton,
-    handleClick
+    handleClick,
+    isSeasonsList
   } = props;
 
   return (
@@ -40,27 +43,33 @@ const CardItem = (props) => {
               color="secondary"
               gutterBottom
             >
-              Popularity: {popularity}
+              {primaryLabel}: {primaryContent}
             </Typography>
             <Typography
               color="secondary"
               gutterBottom
             >
-              Vote average: {voteAverage}
+              {secondaryLabel}: {secondaryContent}
             </Typography>
             <Typography
               color="secondary"
               gutterBottom
             >
-              Vote count: {voteCount}
+              {terthiaryLabel}: {terthiaryContent}
             </Typography>
           </div>
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" onClick={handleClick}>
-            {detailButton}
-          </Button>
-        </CardActions>
+        {
+          isSeasonsList ?
+          null
+          :
+          <CardActions>
+            <Button size="small" color="primary" onClick={handleClick}>
+              {detailButton}
+            </Button>
+          </CardActions>
+        }
+
       </Card>
   )
 }
