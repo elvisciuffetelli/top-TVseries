@@ -21,7 +21,7 @@ class TopRatedView extends Component {
   }
 
   componentDidMount() {
-    HttpClient(urls.TOPRATED)
+    HttpClient(urls.getTvShows().TOP_RATED)
       .then(res => {
         const topRatedCards = res.results;
         this.setState({
@@ -55,7 +55,7 @@ class TopRatedView extends Component {
                 <CardItem item sm={6} md={4} lg={3}
                   heading={card.original_name || "Missing title"}
                   overView={card.overview || "Missing overview"}
-                  image={`${urls.IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
+                  image={`${urls.getDetails().IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
                   primaryLabel="Popularity"
                   primaryContent={card.popularity}
                   secondaryLabel="Average vote"

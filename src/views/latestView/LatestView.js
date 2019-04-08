@@ -28,7 +28,7 @@ class LatestView extends Component {
   componentDidMount() {
     this.saveData();
     console.log(this.store.dataProva);
-    HttpClient(urls.LATEST)
+    HttpClient(urls.getDetails().LATEST)
     .then(res => {
       this.setState({
         latestCards: res,
@@ -38,7 +38,7 @@ class LatestView extends Component {
   }
 
   render() {
-    let imageUrl = `${urls.IMAGE}${this.state.latestCards.backdrop_path}`;
+    let imageUrl = `${urls.getDetails().IMAGE}${this.state.latestCards.backdrop_path}`;
     if (!this.state.latestCards.backdrop_path) {
       imageUrl = false;
     }

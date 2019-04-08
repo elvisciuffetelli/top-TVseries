@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import CardItem from '../../components/cardItem';
 import Typography from '@material-ui/core/Typography';
+import TablePagination from '@material-ui/core/TablePagination';
 import Loader from '../../components/loader';
 import urls from '../../backendApi/constUrls';
 import HttpClient from '../../backendApi/httpClient/httpClient';
@@ -21,7 +22,7 @@ class PopularView extends Component {
   }
 
   componentDidMount() {
-    HttpClient(urls.POPULAR)
+    HttpClient(urls.getTvShows().POPULAR)
       .then(res => {
         const popularCards = res.results;
         this.setState({
@@ -54,7 +55,7 @@ class PopularView extends Component {
                 <CardItem item sm={6} md={4} lg={3}
                   heading={card.original_name || "Missing title"}
                   overView={card.overview || "Missing overview"}
-                  image={`${urls.IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
+                  image={`${urls.getDetails().IMAGE}${card.backdrop_path}` || require("../../assets/images/image-not-found.jpg")}
                   primaryLabel="Popularity"
                   primaryContent={card.popularity}
                   secondaryLabel="Average vote"
@@ -66,6 +67,18 @@ class PopularView extends Component {
                 />
               </Grid>
             ))}
+    {/*         <TablePagination
+              colSpan={3}
+              count={20}
+              rowsPerPage={4}
+              page={1}
+              SelectProps={{
+                native: true,
+              }}}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActionsWrapped}
+            /> */}
           </Grid>
         </div>
       </React.Fragment>

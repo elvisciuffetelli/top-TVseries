@@ -18,7 +18,7 @@ class SeasonDetail extends Component {
   }
 
   componentDidMount() {
-    const seasonUrl = `https://api.themoviedb.org/3/tv/${this.props.match.params.id}/season/${this.props.match.params.number}?api_key=2acf2189a0f548b1b5ed08bbef8dfeb3&language=en-US`;
+    const seasonUrl = urls.getDetails(this.props.match.params.id, this.props.match.params.number).SEASON_DETAIL;
 
     HttpClient(seasonUrl)
       .then(res => {
@@ -56,7 +56,7 @@ class SeasonDetail extends Component {
                   <CardItem item sm={6} md={4} lg={3}
                     heading={episode.name || "Missing title"}
                     overView={episode.overview || "Missing overview"}
-                    image={`${urls.IMAGE}${episode.still_path}` || require("../../assets/images/image-not-found.jpg")}
+                    image={`${urls.getDetails().IMAGE}${episode.still_path}` || require("../../assets/images/image-not-found.jpg")}
                     primaryLabel="Episode number"
                     primaryContent={episode.episode_number}
                     secondaryLabel="Average vote"

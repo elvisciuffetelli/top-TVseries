@@ -28,7 +28,7 @@ class SeasonsList extends Component {
   }
 
   componentDidMount() {
-    const seasonUrl = `https://api.themoviedb.org/3/tv/${this.props.match.params.id}?api_key=2acf2189a0f548b1b5ed08bbef8dfeb3&language=en-US`;
+    const seasonUrl = urls.getDetails(this.props.match.params.id).SEASON;
 
     HttpClient(seasonUrl)
       .then(res => {
@@ -43,16 +43,25 @@ class SeasonsList extends Component {
   }
 
   render() {
-    let imageUrl = `${urls.IMAGE}${this.state.detail.backdrop_path}`;
+    let imageUrl = `${urls.getDetails().IMAGE}${this.state.detail.backdrop_path}`;
     if (!this.state.detail.backdrop_path) {
       imageUrl = false;
     }
+
+    const {
+      original_name,
+      id,
+      overview,
+      number_of_episodes,
+      first_air_date,
+      number_of_seasons
+    } = this.state.detail;
 
     return (
       <React.Fragment>
         <div className="heroContent">
           <Typography component="h1" variant="display2" align="center" color="textPrimary" gutterBottom>
-            Seasons
+            {original_name}
           </Typography>
           <Typography variant="subheading" align="center" color="textSecondary" paragraph>
             Here's a list of all the serie's seasons
@@ -64,16 +73,16 @@ class SeasonsList extends Component {
           <Grid container justify="center" className="seasonList_main-container">
             <Grid item xs={12} sm={10} md={6} className="seasonList_item">
               <CardItem
-                key={this.state.detail.id}
-                heading={this.state.detail.original_name || "Missing title"}
-                overView={this.state.detail.overview || "Missing overview"}
+                key={id}
+                heading={original_name || "Missing title"}
+                overView={overview || "Missing overview"}
                 image= {imageUrl || require("../../assets/images/image-not-found.jpg")}
                 primaryLabel="Number of episodes"
-                primaryContent={this.state.detail.number_of_episodes}
+                primaryContent={number_of_episodes}
                 secondaryLabel="First air date"
-                secondaryContent={this.state.detail.first_air_date}
+                secondaryContent={first_air_date}
                 terthiaryLabel="Number of seasons"
-                terthiaryContent={this.state.detail.number_of_seasons}
+                terthiaryContent={number_of_seasons}
                 isSeasonsList
               />
             </Grid>
@@ -82,15 +91,15 @@ class SeasonsList extends Component {
                 this.state.seasons.map(season => (
                   <React.Fragment key={season.id}>
                     <List component="nav" className="main-list-container">
-                      <ListItem button>
+                      <ListItem>
                         <ListItemText primary={season.name} secondary={season.overview || "No overview available"}/>
                       </ListItem>
-                      <ListItem button className="nested-item">
+                      <ListItem className="nested-item">
                         <ListItemIcon>
                           <StarBorder />
                         </ListItemIcon>
                         <ListItemText inset secondary={`${season.episode_count} episodes`} />
-                        <Button size="small" color="primary" onClick={() => this.goToSeasonDetail(this.props.match.params.id, season.season_number, this.state.detail.original_name)}>
+                        <Button size="large" color="primary" onClick={() => this.goToSeasonDetail(this.props.match.params.id, season.season_number, this.state.detail.original_name)}>
                           Go to season's detail
                         </Button>
                       </ListItem>

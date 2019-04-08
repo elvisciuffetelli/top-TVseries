@@ -64,7 +64,7 @@ const CardItem = (props) => {
           null
           :
           <CardActions>
-            <Button size="small" color="primary" onClick={handleClick}>
+            <Button size="medium" color="primary" onClick={handleClick}>
               {detailButton}
             </Button>
           </CardActions>

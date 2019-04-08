@@ -8,6 +8,9 @@ const AppFooter = () => {
       <Typography variant="subheading" align="center" gutterBottom>
         Coded by Elvis Ciuffetelli
       </Typography>
+      <Typography variant="subheading" align="center" gutterBottom>
+        2019
+      </Typography>
     </footer>
   )
 }

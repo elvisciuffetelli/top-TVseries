@@ -15,6 +15,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { Link } from 'react-router-dom'
 import ListItemText from '@material-ui/core/ListItemText';
 import ListIcon from '@material-ui/icons/List';
+import StarRate from '@material-ui/icons/StarRate';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 import './CustomHeader.css';
 
 const styles = {
@@ -61,7 +63,7 @@ class CustomHeader extends Component {
           <Link to="/toprated" key="toprated">
             <ListItem button>
               <ListItemIcon>
-                {<ListIcon />}
+                {<StarRate />}
               </ListItemIcon>
               <ListItemText primary="Top Rated" />
             </ListItem>
@@ -69,7 +71,7 @@ class CustomHeader extends Component {
           <Link to="/latest" key="latest">
             <ListItem button>
               <ListItemIcon>
-                {<ListIcon />}
+                {<ChevronRight />}
               </ListItemIcon>
               <ListItemText primary="Latest" />
             </ListItem>
@@ -89,7 +91,7 @@ class CustomHeader extends Component {
             <Menu className="icon" onClick={this.toggleDrawer('right', true)}/>
           </Toolbar>
         </AppBar>
-        <Button size="small" color="primary" onClick={() => this.props.history.goBack()}>
+        <Button size="small" color="secondary" onClick={() => this.props.history.goBack()}>
           BACK
         </Button>
 
