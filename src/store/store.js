@@ -5,11 +5,11 @@
  * and should be synchronized with localStorage or sessionStorage
  * with @syncWithLocalStorage and syncWithSessionStorage decorators.
  */
-
+/* 
 import { observable } from 'mobx';
 
 import syncWithLocalStorage from './decorators/syncWithLocalStorage.decorators';
-import syncWithSessionStorage from './decorators/syncWithSessionStorage.decorators';
+//import syncWithSessionStorage from './decorators/syncWithSessionStorage.decorators';
 
 class Store {
 
@@ -18,4 +18,4 @@ class Store {
   dataProva = "";
 }
 
-export default new Store();
+export default new Store(); */

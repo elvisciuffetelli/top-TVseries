@@ -21,12 +21,12 @@ class LatestView extends Component {
       loading: true
     };
 
-    this.saveData = this.saveData.bind(this);
+    //this.saveData = this.saveData.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.saveData();
+    //this.saveData();
     console.log(this.store.dataProva);
     HttpClient(urls.getDetails().LATEST)
     .then(res => {
@@ -87,10 +87,10 @@ class LatestView extends Component {
     this.props.history.push(`/seasons/${id}`);
   }
 
-  @action.bound
+/*   @action.bound
   saveData() {
     this.store.dataProva = 'prova';
-  }
+  } */
 }
 
 export default LatestView;
