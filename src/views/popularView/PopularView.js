@@ -95,9 +95,9 @@ class PopularView extends Component {
   }
 
   forwardPagination() {
-    let params = this.state.page;
-    params += 1;
-    this.getTvShowsPopularList(params);
+    let { page } = this.state;
+    page += 1;
+    this.getTvShowsPopularList(page);
   }
 
   backPagination() {
