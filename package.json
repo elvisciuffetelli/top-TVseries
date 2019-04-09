@@ -2,7 +2,6 @@
   "name": "top-series",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Elv1610/top-TVseries",
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "1.4.3",
@@ -24,12 +23,10 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "node server.js",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

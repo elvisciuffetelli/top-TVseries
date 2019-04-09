@@ -10,7 +10,7 @@ import { action } from 'mobx';
 import store from '../../store/store';
 import './LatestView.css';
 
-@observer
+//@observer
 class LatestView extends Component {
   constructor(props) {
     super(props);
