@@ -6,7 +6,7 @@
     "@babel/runtime": "7.0.0-beta.55",
     "@material-ui/core": "1.4.3",
     "@material-ui/icons": "^3.0.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "customize-cra": "^0.2.12",
     "express": "^4.16.4",
     "express-favicon": "^2.0.1",
@@ -20,7 +20,7 @@
     "react-app-rewired": "^2.1.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
