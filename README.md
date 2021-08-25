@@ -1,4 +1,4 @@
-# A React app with lots of useful informations about the most popular series
+# A React app with lots of useful informations about the most popular TV series
 
 ## Link to the Heroku app (please give it some time since it's a free dyno): <https://top-series-movie-api.herokuapp.com/>
 
