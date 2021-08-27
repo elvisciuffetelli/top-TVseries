@@ -1,6 +1,6 @@
 # A React app with lots of useful informations about the most popular TV series
 
-### Link to the Heroku app (please give it some time for the initial loading since it's a free dyno): <https://top-series-movie-api.herokuapp.com/>
+### Link to the Heroku app (please give it some time for the initial loading since it's a free dyno and goes in sleep mode in case of inactivity): <https://top-series-movie-api.herokuapp.com/>
 
 ## Available Scripts
 
